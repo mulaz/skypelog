@@ -1,3 +1,7 @@
+/*
+Modified to print out utf8 chars in _u{HEX}_ format
+ */
+
 /**********************************************************
  SkypeLog: Display a Skype log as text.
  Copyright 2008 Neal Krawetz, Hacker Factor
@@ -334,7 +338,7 @@ int	main	(int argc, char *argv[])
   int First=0;
   int PrintString=0;
   char *Label;
-
+  int z;
   while((c = getopt(argc,argv,"bF:v")) != -1)
     {
     switch(c)
@@ -469,13 +473,26 @@ int	main	(int argc, char *argv[])
 		if (PrintString && Label) { printf("%s: ",Label); }
 		while((Index < RecordEnd) && (Memory[Index] > 0x03))
 		  {
-		  if (PrintString && isprint(Memory[Index]))
-		    {
-		    fputc(Memory[Index],stdout);
-		    First=1;
-		    }
-		  else
-		    {
+		    //if (PrintString && isprint(Memory[Index]))
+		    if (PrintString && Memory[Index])
+		      {
+			
+			//	printf("%i \n %c\n",Memory[Index],Memory[Index]);
+			
+			if(isprint(Memory[Index])) {
+			  fputc(Memory[Index],stdout);
+			}
+			else {
+			  z=Memory[Index];
+			  printf("_u{%i}_",z);
+			}
+			
+
+
+			First=1;
+		      }
+		    else
+		      {
 		    if (Verbose > 2) { printf(" *%02x*",Memory[Index]); }
 		    }
 		  Index++;
@@ -489,4 +506,3 @@ int	main	(int argc, char *argv[])
     } /* for each file */
   return(0);
 } /* main() */
-

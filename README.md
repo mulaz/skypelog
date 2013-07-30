@@ -1,4 +1,13 @@
 
+
+
+
+
+skypelog  from: https://github.com/kristianlm/skypelog
+parse.py from: http://www.len.ro/work/skype-logs-archiving-on-linux/
+log.sh (edit it with your username/folders) runs both, and does a search/replace for čšž chars
+
+
 # Skypelog
 
 A simple tool to read binary DBB databases and output its text equivalent.
